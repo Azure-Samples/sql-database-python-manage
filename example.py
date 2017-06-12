@@ -58,7 +58,7 @@ def run_example():
 
     # Open access to this server for IPs
     print("Add firewall rule")
-    firewall_rule = sql_client.servers.create_or_update_firewall_rule(
+    firewall_rule = sql_client.firewall_rules.create_or_update(
         GROUP_NAME,
         SERVER_NAME,
         "firewall_rule_name_123.123.123.123",
