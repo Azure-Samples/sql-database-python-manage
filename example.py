@@ -16,6 +16,8 @@ DATABASE_NAME = 'sample-db'
 # AZURE_CLIENT_SECRET: with your Azure Active Directory Application Secret
 # AZURE_SUBSCRIPTION_ID: with your Azure Subscription Id
 #
+
+
 def run_example():
     """Storage management example."""
     #
@@ -23,7 +25,7 @@ def run_example():
     #
     subscription_id = os.environ.get(
         'AZURE_SUBSCRIPTION_ID',
-        '11111111-1111-1111-1111-111111111111') # your Azure Subscription Id
+        '11111111-1111-1111-1111-111111111111')  # your Azure Subscription Id
     credentials = ServicePrincipalCredentials(
         client_id=os.environ['AZURE_CLIENT_ID'],
         secret=os.environ['AZURE_CLIENT_SECRET'],
@@ -38,8 +40,9 @@ def run_example():
 
     # Create Resource group
     print('Create Resource Group')
-    resource_group_params = {'location':'westus'}
-    print_item(resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params))
+    resource_group_params = {'location': 'westus'}
+    print_item(resource_client.resource_groups.create_or_update(
+        GROUP_NAME, resource_group_params))
 
     # Create a SQL server
     print('Create a SQL server')
@@ -48,9 +51,9 @@ def run_example():
         SERVER_NAME,
         {
             'location': REGION,
-            'version': '12.0', # Required for create
-            'administrator_login': 'mysecretname', # Required for create
-            'administrator_login_password': 'HusH_Sec4et' # Required for create
+            'version': '12.0',  # Required for create
+            'administrator_login': 'mysecretname',  # Required for create
+            'administrator_login_password': 'HusH_Sec4et'  # Required for create
         }
     )
     print_item(server)
@@ -62,7 +65,7 @@ def run_example():
         GROUP_NAME,
         SERVER_NAME,
         "firewall_rule_name_123.123.123.123",
-        "123.123.123.123", # Start ip range
+        "123.123.123.123",  # Start ip range
         "123.123.123.123"  # End ip range
     )
     print_item(firewall_rule)
@@ -104,7 +107,8 @@ def run_example():
             'location': REGION
         }
     )
-    database = async_db_create.result() # Wait for completion and return created object
+    # Wait for completion and return created object
+    database = async_db_create.result()
     print_item(database)
     print("\n\n")
 
@@ -160,6 +164,7 @@ def print_item(group):
     if hasattr(group, 'properties'):
         print_properties(group.properties)
 
+
 def print_metric(group):
     """Print an SQL metric."""
     print("\tResource Name: {}".format(group.resource_name))
@@ -167,12 +172,14 @@ def print_metric(group):
     print("\tValue: {}".format(group.current_value))
     print("\tUnit: {}".format(group.unit))
 
+
 def print_properties(props):
     """Print a ResourceGroup properties instance."""
     if props and props.provisioning_state:
         print("\tProperties:")
         print("\t\tProvisioning State: {}".format(props.provisioning_state))
     print("\n\n")
+
 
 if __name__ == "__main__":
     run_example()
