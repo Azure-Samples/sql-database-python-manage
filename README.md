@@ -1,7 +1,11 @@
 ---
-services: sql-database
-platforms: python
-author: lmazuel
+page_type: sample
+languages:
+- python
+products:
+- azure
+description: "This sample shows how to manage SQL Server using the Azure Storage Resource Provider for Python."
+urlFragment: sql-database-python-manage
 ---
 
 # Getting Started with Azure SQL Management in Python
